@@ -16,12 +16,14 @@ def set_algorithm(algorithm):
 ### <----------------------------------- WORLD ----------------------------------> ###
 sky = Sky(texture="sky_sunset")
 walle_voice = Audio("sounds/walle_voice.mp3", autoplay=False)
+soundtrack = Audio("sounds/soundtrack.mp3", autoplay=False)
+soundtrack.play()
 
 ground = Entity(model="plane",
                  scale=(100, 1, 100),
                  position=(0, 0.01, 0),
-                 texture="textures/carpet_color.png",
-                 texture_scale=(5, 5),
+                 texture="textures/ground.jpg",
+                 texture_scale=(36, 36),
                  collider="box",
                  double_sided=True)
 
@@ -41,10 +43,12 @@ for z in range(len(maze)):
                    collider="box")
 
         elif ch == "O":
-            debris_entities[(x, z)] = Entity(model="sphere",
-                                              scale=0.4,
-                                              position=(x, 0.4, z),
-                                              color=color.brown)
+            debris_model = random.choice([ ("objects/debris1.glb", 1, -0.04), ("objects/debris2.glb", 0.28, 0.2) ])
+            debris_entities[(x, z)] = Entity(model=debris_model[0],
+                                              scale=debris_model[1],
+                                              position=(x, debris_model[2], z),
+                                              collider="box")
+                                              #color=color.brown)
 
         elif ch == "X":
             hazard_entities[(x, z)] = Entity(model="cube",
@@ -58,23 +62,29 @@ for z in range(len(maze)):
                                               position=(x, 0.0, z),
                                               color=color.yellow)
 
-plant_entity = Entity(model="cube",
-                      scale=(1, 1, 1),
-                      position=(plant_position[0], 0.5, plant_position[1]),
-                      color=color.green)
+plant_entity = Entity(model="plant.glb",
+                      scale=0.1,
+                      position=(plant_position[0], -0.04, plant_position[1]),
+                      collider="box")
+                      #color=color.green)
 
 walle = Entity(#model="objects/wall-e.glb",
-               model="objects/wall_e_psp.glb",
+               model="objects/wall_e_rot.glb",
                scale=0.6,
                #color=color.red,
-               position=(1, 0, 1),
-               rotation_x=180)
+               position=(1, 0, 1))
 
 ### <----------------------------------- WORLD ----------------------------------> ###
 
 ### <------------ PLAYER + LIGHTS ------------> ###
 player = FirstPersonController()
+player_model = Entity(
+    parent=player,
+    model="objects/eva.glb",
+    scale=1,
+    position=(0, 0.3, -0.51))
 player.position = (3, 56, 15)
+
 scene.fog_density = (10, 400)
 sun = DirectionalLight()
 sun.look_at(Vec3(-1, -1, -10))
