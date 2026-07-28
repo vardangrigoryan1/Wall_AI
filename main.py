@@ -1,6 +1,8 @@
 from ursina import *
+from ursina.prefabs.editor_camera import EditorCamera
 
 app = Ursina()
+EditorCamera()
 
 import environmental_mechanics
 import menu
