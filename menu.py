@@ -3,17 +3,18 @@ import environmental_mechanics
 
 menu_root = None
 
-for e in scene.entities:
-    e.enabled = False
+#for e in scene.entities:
+#    e.enabled = False
 environmental_mechanics.player.enabled = False
 
 def choose(algo):
     environmental_mechanics.set_algorithm(algo)
     environmental_mechanics.game_started = True
 
-    for e in scene.entities:
-        e.enabled = True
-
+    #for e in scene.entities:
+    #    e.enabled = True
+    environmental_mechanics.player.enabled = True
+    
     mouse.locked = True
     mouse.visible = False
 
