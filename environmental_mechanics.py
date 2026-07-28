@@ -1,10 +1,10 @@
-#environemntal_mehcnaics.py
 from ursina import *
 from ursina.prefabs.first_person_controller import FirstPersonController
 from map_generation import *
 from heuristics import _manhattan_heuristic
 from vectorized_pathfinding import find_path
 from performance_measure import add_score, POINTS_DEBRIS, POINTS_PLANT, POINTS_HAZARD
+from ursina.shaders import lit_with_shadows_shader
 
 game_started = False
 def set_algorithm(algorithm):
@@ -25,7 +25,9 @@ ground = Entity(model="plane",
                  texture="textures/ground.jpg",
                  texture_scale=(36, 36),
                  collider="box",
-                 double_sided=True)
+                 double_sided=True,
+                 shader=lit_with_shadows_shader,
+                 color=color.white)
 
 debris_entities = {}
 hazard_entities = {}
@@ -38,9 +40,10 @@ for z in range(len(maze)):
             Entity(model="cube",
                    scale=(1, 10/2, 1),
                    position=(x, 5/2, z),
-                   texture="textures/wallpaper_color.png",
-                   texture_scale=(1/4, 10/4),
-                   collider="box")
+                   texture="textures/wall.jpg",
+                   texture_scale=(1/3, 10/3),
+                   collider="box",
+                   shader=lit_with_shadows_shader)
 
         elif ch == "O":
             debris_model = random.choice([ ("objects/debris1.glb", 1, -0.04), ("objects/debris2.glb", 0.28, 0.2) ])
@@ -57,13 +60,14 @@ for z in range(len(maze)):
                                               color=color.black)
 
         elif ch == "E":
-            hazard_entities[(x, z)] = Entity(model="cube",
-                                              scale=(1, 0.05, 1),
+            hazard_entities[(x, z)] = Entity(model="electrical.glb",
+                                              scale=0.07,
                                               position=(x, 0.0, z),
-                                              color=color.yellow)
+                                              shader=lit_with_shadows_shader)
+                                              #color=color.yellow)
 
-plant_entity = Entity(model="plant.glb",
-                      scale=0.1,
+plant_entity = Entity(model="plant_rot.glb",
+                      scale=0.09,
                       position=(plant_position[0], -0.04, plant_position[1]),
                       collider="box")
                       #color=color.green)
@@ -72,23 +76,26 @@ walle = Entity(#model="objects/wall-e.glb",
                model="objects/wall_e_rot.glb",
                scale=0.6,
                #color=color.red,
-               position=(1, 0, 1))
+               position=(1, 0, 1),
+               shader=lit_with_shadows_shader)
 
 ### <----------------------------------- WORLD ----------------------------------> ###
 
 ### <------------ PLAYER + LIGHTS ------------> ###
 player = FirstPersonController()
-player_model = Entity(
-    parent=player,
-    model="objects/eva.glb",
-    scale=1,
-    position=(0, 0.3, -0.51))
-player.position = (3, 56, 15)
+player_model = Entity(parent=player,
+               model="objects/eva_rot.glb",
+               scale=0.6,
+               position=(0, 0.3, -0.41),
+               shader=lit_with_shadows_shader)
+player.position = (3, 10, 15)
+player.camera_pivot.y = 1.4
 
 scene.fog_density = (10, 400)
 sun = DirectionalLight()
-sun.look_at(Vec3(-1, -1, -10))
-sun._light.show_frustum()
+sun.look_at(Vec3(-1, -1, -1))
+sun.color = color.white
+#sun._light.show_frustum()
 ### <------------ PLAYER + LIGHTS ------------> ###
 
 ### <---- CONFIGURATION CHARACTERISTICS (state) ----> ###
@@ -194,7 +201,7 @@ def update():
     ### <---------------------------> ###
     if carrying_plant is True:
         plant_entity.parent = walle
-        plant_entity.position = Vec3(0.4, 0, 0.6) #CHASE ANELU PAHIN WALLE MOTINY
+        plant_entity.position = Vec3(0.4, 0.1, 0.8) #CHASE ANELU PAHIN WALLE MOTINY
 
         chase_timer += time.dt
         if chase_timer >= REPATH_INTERVAL:
@@ -206,7 +213,9 @@ def update():
             plant_delivered = True
             walle_voice.play()
             plant_entity.parent = player
-            plant_entity.position = Vec3(0.4, -0.3, 0.6) #IM DZERQUM LINELY
+            plant_entity.position = Vec3(0.4, 0.3, 0.6) #IM DZERQUM LINELY
+            plant_entity.rotation_y = -10
+            plant_entity.collider = None
             add_score(POINTS_PLANT, "plant delivered to player")
             return
 
