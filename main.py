@@ -2,6 +2,8 @@ from ursina import *
 from ursina.prefabs.editor_camera import EditorCamera
 
 app = Ursina()
+window.title = "Wall-AI"
+window.cog_button.enabled = False
 EditorCamera()
 
 import environmental_mechanics
