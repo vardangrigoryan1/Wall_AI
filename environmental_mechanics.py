@@ -46,7 +46,7 @@ for z in range(len(maze)):
                    shader=lit_with_shadows_shader)
 
         elif ch == "O":
-            debris_model = random.choice([ ("objects/debris1.glb", 1, -0.04), ("objects/debris2.glb", 0.28, 0.2) ])
+            debris_model = random.choice([ ("models/debris1.glb", 1, -0.04), ("models/debris2.glb", 0.28, 0.2) ])
             debris_entities[(x, z)] = Entity(model=debris_model[0],
                                               scale=debris_model[1],
                                               position=(x, debris_model[2], z),
@@ -75,7 +75,7 @@ plant_entity = Entity(model="plant_rot.glb",
                       #color=color.green)
 
 walle = Entity(#model="objects/wall-e.glb",
-               model="objects/wall_e_rot.glb",
+               model="models/wall_e_rot.glb",
                scale=0.6,
                #color=color.red,
                position=(walle_position[0], 0, walle_position[1]),
@@ -86,7 +86,7 @@ walle = Entity(#model="objects/wall-e.glb",
 ### <------------ PLAYER + LIGHTS ------------> ###
 player = FirstPersonController()
 player_model = Entity(parent=player,
-               model="objects/eva_rot.glb",
+               model="models/eva_rot.glb",
                scale=0.6,
                position=(0, 0.3, -0.41),
                shader=lit_with_shadows_shader)
