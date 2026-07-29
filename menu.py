@@ -49,37 +49,44 @@ def create_menu():
     Text(parent=menu_root,
          text="Choose Pathfinding Algorithm :))",
          origin=(0,0),
-         y=0.35,
+         y=0.35-0.04,
          scale=2)
     
     Button(parent=menu_root,
            text="A*",
            scale=(0.3,0.1),
-           y=0.2,
+           x=-0.2, y=0.2-0.04,
            on_click=Func(choose, "astar"))
     
     Button(parent=menu_root,
            text="BFS",
            scale=(0.3,0.1),
-           y=0.05,
+           x=0.2, y=0.2-0.04,
            on_click=Func(choose, "bfs"))
+
+    Button(parent=menu_root,
+           text="UCS",
+           scale=(0.3,0.1),
+           x=-0.2, y=0.05-0.04,
+           on_click=Func(choose, "ucs"))
     
     Button(parent=menu_root,
            text="DFS",
            scale=(0.3,0.1),
-           y=-0.1,
+           x=0.2, y=0.05-0.04,
            on_click=Func(choose, "dfs"))
 
     Button(parent=menu_root,
            text="Greedy",
            scale=(0.3,0.1),
-           y=-0.25, 
+           x=0, y=-0.1-0.04, 
            on_click=Func(choose, "greedy"))
+
 
     Button(parent=menu_root,
            text="Clustering",
            scale=(0.3,0.1),
-           y=-0.40,
+           x=0, y=-0.25-0.04,
            on_click=Func(run_clustering_button))
 
 #©Vardan Grigoryan
