@@ -69,14 +69,15 @@ for z in range(len(maze)):
 plant_entity = Entity(model="plant_rot.glb",
                       scale=0.09,
                       position=(plant_position[0], -0.04, plant_position[1]),
-                      collider="box")
+                      collider="box",
+                      shader=lit_with_shadows_shader)
                       #color=color.green)
 
 walle = Entity(#model="objects/wall-e.glb",
                model="objects/wall_e_rot.glb",
                scale=0.6,
                #color=color.red,
-               position=(1, 0, 1),
+               position=(walle_position[0], 0, walle_position[1]),
                shader=lit_with_shadows_shader)
 
 ### <----------------------------------- WORLD ----------------------------------> ###
