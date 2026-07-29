@@ -135,11 +135,13 @@ from astar import _astar
 from bfs import _bfs
 from dfs import _dfs
 from greedy import _greedy
+from ucs import _ucs
 _ALGORITHMS = {
     "astar": _astar,
     "bfs": _bfs,
     "dfs": _dfs,
-    "greedy": _greedy
+    "greedy": _greedy,
+    "ucs": _ucs
 }
 
 def find_path(grid, start, goal, algorithm="astar", hazards_positions=None):
