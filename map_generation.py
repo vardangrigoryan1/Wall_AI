@@ -1,4 +1,5 @@
 from vectorized_pathfinding import parse_maze
+from rmap_generation import I_want_to_create_random_map, generate_random_map
 
 #"1" = wall (not walkable)
 #"O" = debris (walkable, collectible, +1 point)
@@ -25,6 +26,11 @@ maze = ["1111111111111111111111111111111111111111111111111111",
         "1               1111           11                  1",
         "1111111111111111111111111111111111111111111111111111"]
 
-grid, debris_positions, plant_position, base_position, hazards_positions = parse_maze(maze)
+if I_want_to_create_random_map is True:
+        maze = generate_random_map()
+elif I_want_to_create_random_map is False:
+        maze = maze #pass
+
+grid, debris_positions, plant_position, base_position, walle_position, hazards_positions = parse_maze(maze)
 
 #©Vardan Grigoryan
