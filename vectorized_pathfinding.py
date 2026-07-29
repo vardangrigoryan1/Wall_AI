@@ -134,10 +134,12 @@ def _reconstruct(came_from, current):
 from astar import _astar
 from bfs import _bfs
 from dfs import _dfs
+from greedy import _greedy
 _ALGORITHMS = {
     "astar": _astar,
     "bfs": _bfs,
     "dfs": _dfs,
+    "greedy": _greedy
 }
 
 def find_path(grid, start, goal, algorithm="astar", hazards_positions=None):
