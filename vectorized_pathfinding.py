@@ -22,7 +22,7 @@ PIT_COST = 1000
 
 
 ### <-----------------------------> ###
-def parse_maze(maze, wall="1", debris="O", plant="P", base="B", pit="X", electrical="E"):
+def parse_maze(maze, wall="1", debris="O", plant="P", base="B", walle="W", pit="X", electrical="E"):
     height = len(maze)
     width = max(len(row) for row in maze)
 
@@ -30,6 +30,7 @@ def parse_maze(maze, wall="1", debris="O", plant="P", base="B", pit="X", electri
     debris_positions = []
     plant_position = None
     base_position = None
+    walle_position = None
     hazards_positions = {}
 
     for z, row in enumerate(maze):
@@ -45,12 +46,14 @@ def parse_maze(maze, wall="1", debris="O", plant="P", base="B", pit="X", electri
                     plant_position = (x, z)
                 elif symb == base:
                     base_position = (x, z)
+                elif symb == walle:
+                    walle_position = (x, z)
                 elif symb == pit:
                     hazards_positions[(x, z)] = "pit"
                 elif symb == electrical:
                     hazards_positions[(x, z)] = "electrical"
 
-    return grid, debris_positions, plant_position, base_position, hazards_positions
+    return grid, debris_positions, plant_position, base_position, walle_position, hazards_positions
 ### <-----------------------------> ###
 
 
