@@ -63,6 +63,7 @@ for z in range(len(maze)):
             hazard_entities[(x, z)] = Entity(model="electrical.glb",
                                               scale=0.07,
                                               position=(x, 0.0, z),
+                                              collider="box",
                                               shader=lit_with_shadows_shader)
                                               #color=color.yellow)
 
