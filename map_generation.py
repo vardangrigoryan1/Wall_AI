@@ -1,5 +1,5 @@
 from vectorized_pathfinding import parse_maze
-from rmap_generation import I_want_to_create_random_map, generate_random_map
+from rmap_generation import I_want_to_create_a_random_map, generate_random_map
 
 #"1" = wall (not walkable)
 #"O" = debris (walkable, collectible, +1 point)
