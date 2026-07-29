@@ -12,7 +12,7 @@ def _dfs(grid, start, goal, hazards_positions):
         if current == goal:
             return _reconstruct(came_from, current)
 
-        for next_x, next_x, _cost in _neighbors_of(grid, *current, hazards_positions):
+        for next_x, next_z, _cost in _neighbors_of(grid, *current, hazards_positions):
             next_cell = (next_x, next_x)
             if next_cell not in visited:
                 visited.add(next_cell)
