@@ -21,7 +21,7 @@ soundtrack.play()
 
 ground = Entity(model="plane",
                  scale=(100, 1, 100),
-                 position=(0, 0.01, 0),
+                 position=(20, 0.01, 0), #AFTER SENT
                  texture="textures/ground.jpg",
                  texture_scale=(36, 36),
                  collider="box",
@@ -90,7 +90,7 @@ player_model = Entity(parent=player,
                scale=0.6,
                position=(0, 0.3, -0.41),
                shader=lit_with_shadows_shader)
-player.position = (3, 10, 15)
+player.position = (1.5, 0.001, 1.5) #AFTER SENT
 player.camera_pivot.y = 1.4
 
 scene.fog_density = (10, 400)
