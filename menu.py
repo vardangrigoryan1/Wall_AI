@@ -1,6 +1,7 @@
 from ursina import *
 import environmental_mechanics
 import clustering
+import webbrowser #AFTER SENT
 
 menu_root = None
 
@@ -35,6 +36,10 @@ def run_clustering_button():
     from environmental_mechanics import grid, walle, debris_positions, hazards_positions
     agent_position = environmental_mechanics.cell(walle.position)
     clustering.run_clustering(grid, agent_position, debris_positions, hazards_positions=hazards_positions)
+
+
+def open_link(): #AFTER SENT
+    webbrowser.open("https://github.com/vardangrigoryan1")
 
 
 
@@ -88,5 +93,17 @@ def create_menu():
            scale=(0.3,0.1),
            x=0, y=-0.25-0.04,
            on_click=Func(run_clustering_button))
+
+
+    Button(text="©Vardan Grigoryan",          #AFTER SENT
+           color=color.clear,                 #no button background
+           highlight_color=color.clear,       #background transparent on hover
+           pressed_color=color.clear,         #background transparent when clicked
+           text_color = color.rgb(0, 170, 255),
+           highlight_text_color=color.blue,   #text color on hover
+           pressed_text_color=color.blue,     #text color while pressed
+           scale=(0.3, 0.05),
+           y=-0.471,
+           on_click=Func(open_link))
 
 #©Vardan Grigoryan
